@@ -21,9 +21,7 @@ class GildedRose
           end
         end
       else
-        if item.quality > 0
-          item.quality -= 1
-        end
+        item.quality -= 1 if item.quality > 0
       end
 
       item.sell_in = item.sell_in - 1
@@ -40,9 +38,7 @@ class GildedRose
             item.quality = 0
           end
         else
-          if item.quality < 50
-            item.quality += 1
-          end
+          item.quality += 1 if item.quality < 50
         end
       end
     end
