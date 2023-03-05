@@ -230,11 +230,13 @@ describe GildedRose do
       end
     end
 
-    it "does not change the name" do
-      items = [Item.new("foo", 0, 0)]
-      GildedRose.new(items).update_quality()
-      expect(items[0].name).to eq "foo"
+    describe "item name" do
+      let(:item) { Item.new("foo", 0, 0) }
+
+      it "does not change the name" do
+        expect { gilded_rose.update_quality }
+          .not_to change { item.name }
+      end
     end
   end
-
 end
