@@ -32,9 +32,7 @@ class GildedRose
         elsif item.name == "Backstage passes to a TAFKAL80ETC concert"
           item.quality = 0
         elsif item.quality > 0
-          if item.name != "Sulfuras, Hand of Ragnaros"
-            item.quality -= 1
-          end
+          item.quality -= 1
         end
       end
     end
