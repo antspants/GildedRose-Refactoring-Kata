@@ -4,6 +4,22 @@ require_relative '../gilded_rose'
 describe GildedRose do
 
   describe "#update_quality" do
+    describe "sulfuras" do
+      let(:item) { Item.new('Sulfuras, Hand of Ragnaros', 25, 80) }
+      let(:items) { [item] }
+      let(:gilded_rose) { GildedRose.new(items) }
+
+      it "does not change quality" do
+        expect { gilded_rose.update_quality }
+          .not_to change { item.quality }
+      end
+
+      it "does not change sell_in" do
+        expect { gilded_rose.update_quality }
+          .not_to change { item.sell_in }
+      end
+    end
+
     describe "backstage passes" do
       let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 25, 20) }
       let(:items) { [item] }
