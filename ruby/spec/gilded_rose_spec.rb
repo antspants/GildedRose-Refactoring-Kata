@@ -4,6 +4,18 @@ require_relative '../gilded_rose'
 describe GildedRose do
 
   describe "#update_quality" do
+    describe "updating sell_in" do
+      let(:item) { Item.new('any item', -1, 49) }
+      let(:items) { [item] }
+      let(:gilded_rose) { GildedRose.new(items) }
+
+      it "decrements sell_in" do
+        expect { gilded_rose.update_quality }
+          .to change { item.sell_in }
+          .by(-1)
+      end
+    end
+
     describe "standard item" do
       let(:item) { Item.new('Standard item', 25, 30) }
       let(:items) { [item] }
