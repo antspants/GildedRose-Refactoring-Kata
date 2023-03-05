@@ -4,10 +4,11 @@ require_relative '../gilded_rose'
 describe GildedRose do
 
   describe "#update_quality" do
+    let(:items) { [item] }
+    let(:gilded_rose) { GildedRose.new(items) }
+
     describe "updating sell_in" do
       let(:item) { Item.new('any item', -1, 49) }
-      let(:items) { [item] }
-      let(:gilded_rose) { GildedRose.new(items) }
 
       it "decrements sell_in" do
         expect { gilded_rose.update_quality }
@@ -18,8 +19,6 @@ describe GildedRose do
 
     describe "standard item" do
       let(:item) { Item.new('Standard item', 25, 30) }
-      let(:items) { [item] }
-      let(:gilded_rose) { GildedRose.new(items) }
 
       context "current item sell_in > 1" do
         context "current item quality > 0" do
@@ -77,8 +76,6 @@ describe GildedRose do
 
     describe "sulfuras" do
       let(:item) { Item.new('Sulfuras, Hand of Ragnaros', 25, 80) }
-      let(:items) { [item] }
-      let(:gilded_rose) { GildedRose.new(items) }
 
       it "does not change quality" do
         expect { gilded_rose.update_quality }
@@ -93,8 +90,6 @@ describe GildedRose do
 
     describe "backstage passes" do
       let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 25, 20) }
-      let(:items) { [item] }
-      let(:gilded_rose) { GildedRose.new(items) }
 
       context "current item sell_<= 0" do
         let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 0, 20) }
@@ -156,6 +151,7 @@ describe GildedRose do
 
         context "current quality is 48" do
           let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 5, 48) }
+
           it "increments quality by 2" do
             expect { gilded_rose.update_quality }
               .to change { item.quality }
@@ -167,8 +163,6 @@ describe GildedRose do
 
     describe "aged brie" do
       let(:item) { Item.new('Aged Brie', 25, 20) }
-      let(:items) { [item] }
-      let(:gilded_rose) { GildedRose.new(items) }
 
       context "current item sell_in > 1" do
         let(:item) { Item.new('Aged Brie', 25, 20) }
