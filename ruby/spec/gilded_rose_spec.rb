@@ -4,6 +4,65 @@ require_relative '../gilded_rose'
 describe GildedRose do
 
   describe "#update_quality" do
+    describe "standard item" do
+      let(:item) { Item.new('Standard item', 25, 30) }
+      let(:items) { [item] }
+      let(:gilded_rose) { GildedRose.new(items) }
+
+      context "current item sell_in > 1" do
+        context "current item quality > 0" do
+          let(:item) { Item.new('Standard item', 25, 30) }
+          
+          it "decrements quality by 1" do
+            expect { gilded_rose.update_quality }
+              .to change { item.quality }
+              .by(-1)
+          end
+        end
+
+        context "current item quality is 0" do
+          let(:item) { Item.new('Standard item', 25, 0) }
+          
+          it "does not change quality" do
+            expect { gilded_rose.update_quality }
+              .not_to change { item.quality }
+          end
+        end
+      end
+
+      context "current item sell_in is 0" do
+        let(:item) { Item.new('Standard item', 0, 20) }
+
+        context "current item quality > 0" do
+          it "decrements quality by 2" do
+            expect { gilded_rose.update_quality }
+              .to change { item.quality }
+              .by(-2)
+          end
+        end
+
+        context "current item quality is 1" do
+          let(:item) { Item.new('Standard item', 0, 1) }
+
+          it "decrements quality by 1" do
+            expect { gilded_rose.update_quality }
+              .to change { item.quality }
+              .by(-1)
+          end
+        end
+
+        context "current item quality is 0" do
+          let(:item) { Item.new('Standard item', 0, 0) }
+
+          it "does not decrements quality" do
+            expect { gilded_rose.update_quality }
+              .not_to change { item.quality }
+          end
+        end
+
+      end
+    end
+
     describe "sulfuras" do
       let(:item) { Item.new('Sulfuras, Hand of Ragnaros', 25, 80) }
       let(:items) { [item] }
