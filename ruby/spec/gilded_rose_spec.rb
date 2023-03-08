@@ -36,6 +36,15 @@ RSpec.describe GildedRose do
               .not_to change { item.quality }
           end
         end
+
+        context 'current item quality is < 0' do
+          let(:item) { Item.new('Standard item', 25, -1) }
+
+          it 'does not change quality' do
+            expect { gilded_rose.update_quality }
+              .not_to change { item.quality }
+          end
+        end
       end
 
       context 'current item sell_in is 0' do
