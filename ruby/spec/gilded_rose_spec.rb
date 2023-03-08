@@ -85,8 +85,6 @@ RSpec.describe GildedRose do
     end
 
     describe 'backstage passes' do
-      let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 25, 20) }
-
       context 'current item sell_<= 0' do
         let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 0, 20) }
 
@@ -97,9 +95,9 @@ RSpec.describe GildedRose do
       end
 
       context 'current item sell_in > 10' do
-        let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 25, 20) }
-
         context 'current quality is < 50' do
+          let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 25, 20) }
+
           it 'increments quality by 1' do
             expect { gilded_rose.update_quality }
               .to change { item.quality }
