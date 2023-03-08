@@ -140,6 +140,15 @@ RSpec.describe GildedRose do
               .to change { item.quality }
               .by(1)
           end
+
+          context 'current quality is 50' do
+            let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 10, 50) }
+
+            it 'does not increment quality' do
+              expect { gilded_rose.update_quality }
+                .not_to change { item.quality }
+            end
+          end
         end
       end
 
@@ -159,6 +168,25 @@ RSpec.describe GildedRose do
             expect { gilded_rose.update_quality }
               .to change { item.quality }
               .by(2)
+          end
+        end
+
+        context 'current quality is 49' do
+          let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 5, 49) }
+
+          it 'increments quality by 2' do
+            expect { gilded_rose.update_quality }
+              .to change { item.quality }
+              .by(1)
+          end
+        end
+
+        context 'current quality is 50' do
+          let(:item) { Item.new('Backstage passes to a TAFKAL80ETC concert', 5, 50) }
+
+          it 'does not increment quality' do
+            expect { gilded_rose.update_quality }
+              .not_to change { item.quality }
           end
         end
       end
