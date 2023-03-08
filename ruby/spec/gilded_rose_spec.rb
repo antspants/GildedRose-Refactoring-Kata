@@ -204,6 +204,16 @@ RSpec.describe GildedRose do
           end
         end
 
+        context 'current quality equals 49' do
+          let(:item) { Item.new('Aged Brie', 25, 49) }
+
+          it 'does not increment quality' do
+            expect { gilded_rose.update_quality }
+              .to change { item.quality }
+              .by(1)
+          end
+        end
+
         context 'current quality equals 50' do
           let(:item) { Item.new('Aged Brie', 25, 50) }
 
@@ -234,6 +244,15 @@ RSpec.describe GildedRose do
               .by(1)
           end
         end
+
+        context 'current quality is 50' do
+          let(:item) { Item.new('Aged Brie', 0, 50) }
+
+          it 'does not increment quality' do
+            expect { gilded_rose.update_quality }
+              .not_to change { item.quality }
+          end
+        end
       end
 
       context 'current item sell_in is < 0' do
@@ -254,6 +273,15 @@ RSpec.describe GildedRose do
             expect { gilded_rose.update_quality }
               .to change { item.quality }
               .by(1)
+          end
+        end
+
+        context 'current quality is 50' do
+          let(:item) { Item.new('Aged Brie', -1, 50) }
+
+          it 'does not increment quality' do
+            expect { gilded_rose.update_quality }
+              .not_to change { item.quality }
           end
         end
       end
