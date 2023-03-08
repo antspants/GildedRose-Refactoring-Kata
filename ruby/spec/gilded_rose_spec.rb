@@ -1,7 +1,7 @@
 ## require File.join(File.dirname(__FILE__), 'gilded_rose')
 require_relative '../gilded_rose'
 
-describe GildedRose do
+RSpec.describe GildedRose do
   describe '#update_quality' do
     let(:items) { [item] }
     let(:gilded_rose) { GildedRose.new(items) }
@@ -17,8 +17,6 @@ describe GildedRose do
     end
 
     describe 'standard item' do
-      let(:item) { Item.new('Standard item', 25, 30) }
-
       context 'current item sell_in > 1' do
         context 'current item quality > 0' do
           let(:item) { Item.new('Standard item', 25, 30) }
@@ -41,9 +39,9 @@ describe GildedRose do
       end
 
       context 'current item sell_in is 0' do
-        let(:item) { Item.new('Standard item', 0, 20) }
-
         context 'current item quality > 0' do
+          let(:item) { Item.new('Standard item', 0, 20) }
+
           it 'decrements quality by 2' do
             expect { gilded_rose.update_quality }
               .to change { item.quality }
