@@ -156,12 +156,10 @@ RSpec.describe GildedRose do
     end
 
     describe 'aged brie' do
-      let(:item) { Item.new('Aged Brie', 25, 20) }
-
       context 'current item sell_in > 1' do
-        let(:item) { Item.new('Aged Brie', 25, 20) }
-
         context 'current quality is < 50' do
+          let(:item) { Item.new('Aged Brie', 25, 20) }
+
           it 'increments quality by 1' do
             expect { gilded_rose.update_quality }
               .to change { item.quality }
@@ -180,9 +178,9 @@ RSpec.describe GildedRose do
       end
 
       context 'current item sell_in is 0' do
-        let(:item) { Item.new('Aged Brie', 0, 20) }
-
         context 'current quality < 49' do
+          let(:item) { Item.new('Aged Brie', 0, 20) }
+
           it 'increments quality by 2' do
             expect { gilded_rose.update_quality }
               .to change { item.quality }
@@ -202,9 +200,9 @@ RSpec.describe GildedRose do
       end
 
       context 'current item sell_in is < 0' do
-        let(:item) { Item.new('Aged Brie', -1, 20) }
-
         context 'current quality is < 49' do
+          let(:item) { Item.new('Aged Brie', -1, 20) }
+
           it 'increments quality by 2' do
             expect { gilded_rose.update_quality }
               .to change { item.quality }
